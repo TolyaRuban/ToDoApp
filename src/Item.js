@@ -1,7 +1,8 @@
 import React from 'react';
 
 function Item(props) {
-  const { id, text, checked, onChange, i } = props;
+  const { id, text, checked, onChange, i, handleDelete } = props;
+  const index = i;
   return (
     // <li key={id}>{text}</li>
     <li key={id}>
@@ -10,7 +11,7 @@ function Item(props) {
           <input
             id={i}
             // name="complite-"
-            className="list-item__check-box"
+            className={"list-item__check-box " + (checked ? "text--through" : "")}
             type="checkbox"
             checked={checked}
             onChange={onChange}
@@ -19,8 +20,8 @@ function Item(props) {
             htmlFor={i}
           />
         </div>
-        <div className="list-item__text">{text}</div>
-        <div className="list-item__delete"></div>
+        <div className={"list-item__text " + (checked ? "text--through" : "")}>{text}</div>
+        <div className="list-item__delete" onClick={() => handleDelete(index)}> ✕ </div>
       </div>
     </li>
   )

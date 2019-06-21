@@ -17,16 +17,25 @@ class Main extends React.Component {
       ],
 
     }
-
+    // this.handleDelete = this.handleDelete.bind(this)
   };
 
   handleChange = async (event) => {
-    const { name, value, type, checked } = event.target
+    const { name, value, type, checked } = event.target;
 
     await this.setState({
       currentToDo: value
     });
     console.log(value);
+  }
+
+  handleDelete = (index) => {
+    // if (event.target === "div.list-item__delete")
+    const todos = [...this.state.todos],
+      upDateTodos = todos.filter((curr, i) => i !== index);
+    this.setState({ todos: upDateTodos })
+    // console.log(event.target);
+    console.log(index);
   }
 
   handleKeyPress = async (event) => {
@@ -95,6 +104,7 @@ class Main extends React.Component {
                 checked={elem.completed}
                 onChange={this.handleChangeStatus}
                 i={i}
+                handleDelete={this.handleDelete}
               />
             ))}
           </ul>
