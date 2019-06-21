@@ -8,14 +8,21 @@ class Main extends React.Component {
 
     this.state = {
       currentToDo: "",
-      todos: [],
-      id: 0,
+      todos: [
+        {
+          id: 1,
+          text: 1,
+          completed: false
+        }
+      ],
+
     }
 
   };
 
   handleChange = async (event) => {
-    const value = event.target.value;
+    const { name, value, type, checked } = event.target
+
     await this.setState({
       currentToDo: value
     });
@@ -25,24 +32,51 @@ class Main extends React.Component {
   handleKeyPress = async (event) => {
     if (event.which === 13) {
       event.preventDefault();
-      // let key = Math.round(Math.random() * (100 - 1) + 1);
-      console.log("enter");
+      let key = require("randomstring");
+      key = key.generate({
+        length: 5,
+        charset: 'alphabetic'
+      });
+      console.log(key);
       const initToDo = [...this.state.todos, {
-        id: this.state.id,
+        id: key,
         text: this.state.currentToDo,
         completed: false
       }]
       await this.setState({
         todos: initToDo,
-        currentToDo: "",
-        id: this.state.id + 1
+        currentToDo: ""
+        
       });
       // console.log(this.state.currentToDo);
       console.log(this.state.todos);
     };
   }
 
+  handleChangeStatus = async (event) => {
+    console.log(event.target.id);
+    // const todos = this.state.todos.map(el => {
+    //   if  (el.id === event.target.id) {
+    //     if (!el.completed){
+    //       el.completed = true;
+    //     } else {
+    //       el.completed = false;
+    //     }
+    //   }
+    //   return el;
+    // });
+    const todos = [...this.state.todos];
+    todos[event.target.id]['completed'] = event.target.checked;
+    await this.setState({
+      todos: todos
+    })
+    console.log(todos);
+  }
+
+  
+
   render() {
+
     return (
       <div className="todos">
         <input
@@ -52,14 +86,16 @@ class Main extends React.Component {
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
         />
-        <div className="todos__list">
+        <div className="todo-list">
           <ul>
-            {this.state.todos.map((elem) => (
+            {this.state.todos.map((elem, i) => (
               <Item 
-                id={this.state.id}
+                id={elem.id}
                 text={elem.text}
+                checked={elem.completed}
+                onChange={this.handleChangeStatus}
+                i={i}
               />
-              // <li key={elem.text}>{elem.text}</li>
             ))}
           </ul>
         </div>
