@@ -1,8 +1,10 @@
 .App {
   text-align: center;
+  border-color: #F5F5F5;
 }
 * {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 
 }
@@ -37,9 +39,9 @@ li {
   font-size: 24px;
   color: rgb(77, 77, 77);
   /* box-shadow:  */
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+  box-shadow: 0 2px 223px 105px rgba(0, 0, 0, 0.2),
   0 25px 50px 0 rgba(0, 0, 0, 0.1),
-  0 1px 1px rgba(0, 0, 0, 0.2),
+  0 1px 15px rgba(0, 0, 0, 0.2),
   0 8px 0 -3px #f6f6f6,
   0 9px 1px -3px rgba(0, 0, 0, 0.2),
   0 16px 0 -6px #f6f6f6,
@@ -57,7 +59,7 @@ li {
   font-size: 24px;
   color: inherit;
   /* font-family: inherit; */
-  /* border: none; */
+  border: none;
   background: rgba(0, 0, 0, 0.003);
   /* box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03); */
 }
@@ -100,7 +102,7 @@ li {
     0 20px 0 -10px #eee,
     /* The third layer shadow */
     0 20px 1px -9px rgba(0, 0, 0, 0.15);
-  padding: 30px;
+  padding: 5px;
 }
 
 .list-item {
@@ -108,6 +110,7 @@ li {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  border-bottom: 2px solid #E6E6E6
 }
 
 .list-item__check-box {
