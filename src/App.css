@@ -18,7 +18,10 @@ li {
 }
 .main {
   position: relative;
-  margin: 50px 0 40px 0;
+  width: 550px;
+  /* margin: 50px 0 40px 0; */
+  margin: auto;
+  margin-top: 30px;
   text-align: center;
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background: #fff;
@@ -30,13 +33,14 @@ li {
   font-size: 100px;
   font-weight: 100;
   text-align: center;
+  background: white;
   color: rgba(175, 47, 47, 0.15);
 }
 .todos {
   position: relative;
   display: block;
   margin: auto;
-  width: 550px;
+  width: 100%;
   font-size: 24px;
   color: rgb(77, 77, 77);
   /* box-shadow:  */
@@ -90,19 +94,8 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #efefef;
+  border-top: 2px solid #E6E6E6;
   list-style: none;
-  box-shadow:
-    /* The top layer shadow */
-    0 1px 1px rgba(0, 0, 0, 0.15),
-    /* The second layer */
-    0 10px 0 -5px #eee,
-    /* The second layer shadow */
-    0 10px 1px -4px rgba(0, 0, 0, 0.15),
-    /* The third layer */
-    0 20px 0 -10px #eee,
-    /* The third layer shadow */
-    0 20px 1px -9px rgba(0, 0, 0, 0.15);
   padding: 0 5px;
 }
 
@@ -112,12 +105,16 @@ li {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  border-bottom: 2px solid #E6E6E6
+  padding: 15px 0;
+  border-bottom: 1px solid #E6E6E6
 }
 
 .list-item:hover .list-item__delete {
   display: block;
   color: #cc9a9a;
+}
+.list-item:hover .list-item__delete:hover {
+  color: #af5b5e;
 }
 
 .list-item__check-box {
@@ -135,13 +132,18 @@ li {
   height: 40px;
   text-align: center;
   vertical-align: middle;
-  transition: background linear .5s;
+  /* transition: background linear .5s; */
 }
 
 .list-item__check-box:checked+label::before {
   background:url("img/checked.svg") no-repeat;
 }
 
+.list-item__text {
+  width: 100%;
+  text-align: start;
+  transition: color linear .5s;
+}
 .text--through {
   color: #d9d9d9;
   text-decoration: line-through;
@@ -150,13 +152,54 @@ li {
 .list-item__delete {
   position: relative;
   width: 40px;
-  height: 40px;
+  /* height: 40px; */
   margin: 0;
-  font-size: 30px;
+  font-size: 22px;
   color: transparent;
   cursor: pointer;
 }
 
 .list-item__delete:hover {
-  color: #af5b5e;
+  color: #050505;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  padding: 5px;
+  background: transparent;
+  box-shadow:
+  /* The top layer shadow */
+  0 1px 1px rgba(0, 0, 0, 0.15),
+  /* The second layer */
+  0 10px 0 -5px #eee,
+  /* The second layer shadow */
+  0 10px 1px -4px rgba(0, 0, 0, 0.15),
+  /* The third layer */
+  0 20px 0 -10px #eee,
+  /* The third layer shadow */
+  0 20px 1px -9px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  color: #777;
+}
+
+.footer-item__btn {
+  background: inherit;
+  padding: 3px 7px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: inherit;
+  cursor: pointer;
+}
+.footer-item__btn:hover {
+  border-color: rgba(175, 47, 47, 0.1);
+}
+.selected {
+  border-color: rgba(175, 47, 47, 0.2);
+}
+
+.hidden {
+  display: none;
 }

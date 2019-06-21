@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Item from './Item';
+import Footer from './Footer';
 
 class Main extends React.Component {
   constructor(props) {
@@ -9,19 +10,20 @@ class Main extends React.Component {
     this.state = {
       currentToDo: "",
       todos: [
-        {
-          id: 1,
-          text: 1,
-          completed: false
-        }
+        // {
+        //   id: 1,
+        //   text: 1,
+        //   completed: false
+        // }
       ],
-
+      selectedFilter: "All",
+      finalTodos: [],
     }
-    // this.handleDelete = this.handleDelete.bind(this)
+
   };
 
   handleChange = async (event) => {
-    const { name, value, type, checked } = event.target;
+    const { value } = event.target;
 
     await this.setState({
       currentToDo: value
@@ -61,14 +63,14 @@ class Main extends React.Component {
       console.log(this.state.todos);
     };
   }
-
+  
   handleChangeStatus = async (event) => {
     console.log(event.target.id);
     // const todos = this.state.todos.map(el => {
-    //   if  (el.id === event.target.id) {
-    //     if (!el.completed){
-    //       el.completed = true;
-    //     } else {
+      //   if  (el.id === event.target.id) {
+        //     if (!el.completed){
+          //       el.completed = true;
+          //     } else {
     //       el.completed = false;
     //     }
     //   }
@@ -81,35 +83,70 @@ class Main extends React.Component {
     })
     console.log(todos);
   }
-
   
+  filter = async () => {
+    let finalTodoss;
+    const todos = [...this.state.todos];
+    
+    if (this.state.selectedFilter === "Active") {
+      finalTodoss = todos.filter((elem) => (elem.completed === false));
+      console.log(this.state.selectedFilter);
+      console.log(todos)
+    } else /* (this.selectedFilter === "Completed") */ {
+      finalTodoss = todos.filter((elem) => (elem.completed === true));
+      console.log(this.finalTodoss);
+    } /* else {
+      finalTodoss = todos;
+      console.log(this.state.selectedFilter);
+    }; */
 
-  render() {
+    await this.setState({
+      finalTodos: finalTodoss
+    })
+    console.log(this.state.finalTodos)
+  }
 
+  selectFilter = async (event) => {
+    await this.setState({
+      selectedFilter: event.target.name
+    });
+    this.filter();
+  }
+
+
+  render() {  
     return (
-      <div className="todos">
-        <input
-          type="text"
-          value={this.state.currentToDo}
-          placeholder="What need to be done?"
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeyPress}
-        />
-        <div className="todo-list">
-          <ul>
-            {this.state.todos.map((elem, i) => (
-              <Item 
-                id={elem.id}
-                text={elem.text}
-                checked={elem.completed}
-                onChange={this.handleChangeStatus}
-                i={i}
-                handleDelete={this.handleDelete}
-              />
-            ))}
-          </ul>
+      <>
+        <div className="todos">
+          <input
+            type="text"
+            value={this.state.currentToDo}
+            placeholder="What need to be done?"
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
+          />
+          <div className="todo-list">
+            <ul>
+              {this.state.finalTodos.map((elem, i) => (
+                <Item 
+                  id={elem.id}
+                  text={elem.text}
+                  checked={elem.completed}
+                  onChange={this.handleChangeStatus}
+                  i={i}
+                  handleDelete={this.handleDelete}
+                />
+              ))}
+            </ul>
+          </div>
+          <Footer 
+            selected={this.state.selectedFilter}
+            length={this.state.todos.length}
+            onclick={this.selectFilter}
+          />
         </div>
-      </div>
+        
+      </>
     )
   }
 }
