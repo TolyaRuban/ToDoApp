@@ -92,13 +92,13 @@ class Main extends React.Component {
       finalTodoss = todos.filter((elem) => (elem.completed === false));
       console.log(this.state.selectedFilter);
       console.log(todos)
-    } else /* (this.selectedFilter === "Completed") */ {
+    } else if (this.selectedFilter === "Completed") {
       finalTodoss = todos.filter((elem) => (elem.completed === true));
       console.log(this.finalTodoss);
-    } /* else {
+    } else {
       finalTodoss = todos;
       console.log(this.state.selectedFilter);
-    }; */
+    };
 
     await this.setState({
       finalTodos: finalTodoss
