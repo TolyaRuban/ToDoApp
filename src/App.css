@@ -54,7 +54,7 @@ li {
   
   
 }
-.todos > input {
+.todos .todos__input {
   display: block;
   margin: auto;
   /* margin-bottom: 30px; */
@@ -68,19 +68,19 @@ li {
   background: rgba(0, 0, 0, 0.003);
   box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.77);
 }
-.todos input::-webkit-input-placeholder {
+.todos .todos__input::-webkit-input-placeholder {
   font-style: italic;
   font-weight: 300;
   color: #e6e6e6;
 }
 
-.todos input::-moz-placeholder {
+.todos .todos__input::-moz-placeholder {
   font-style: italic;
   font-weight: 300;
   color: #e6e6e6;
 }
 
-.todos input::input-placeholder {
+.todos .todos__input::input-placeholder {
   font-style: italic;
   /* fz */
   font-weight: 300;
@@ -135,7 +135,7 @@ li {
   /* transition: background linear .5s; */
 }
 
-.list-item__check-box:checked+label::before {
+.list-item__check-box:checked + label::before {
   background:url("img/checked.svg") no-repeat;
 }
 

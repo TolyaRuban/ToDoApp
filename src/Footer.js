@@ -1,5 +1,9 @@
 import React from 'react';
 
+export const COMPLETED = "Completed";
+export const ALL = "All";
+export const ACTIVE = "Active";
+
 function Footer(props) {
 
   return (
@@ -8,9 +12,9 @@ function Footer(props) {
         <p>{props.length} items left</p>
       </div>
       <div className="footer__item" onClick={props.onclick}>
-        <button name="All" className={"footer-item__btn " + (props.selected === "All" ? "selected" : "")}>All</button>
-        <button name="Active" className={"footer-item__btn " + (props.selected === "Active" ? "selected" : "")}>Active</button>
-        <button name="Completed" className={"footer-item__btn " + (props.selected === "Completed" ? "selected" : "")}>Completed</button>
+        <button name={ALL} className={"footer-item__btn " + (props.selected === ALL ? "selected" : "")}>All</button>
+        <button name={ACTIVE} className={"footer-item__btn " + (props.selected === ACTIVE ? "selected" : "")}>Active</button>
+        <button name={COMPLETED} className={"footer-item__btn " + (props.selected === COMPLETED ? "selected" : "")}>Completed</button>
       </div>
       <div className="footer__item">
         <button className="footer-item__btn"> Clear completed</button>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Item from './Item';
-import Footer from './Footer';
+import Footer, {COMPLETED} from './Footer';
 
 class Main extends React.Component {
   constructor(props) {
@@ -10,11 +10,16 @@ class Main extends React.Component {
     this.state = {
       currentToDo: "",
       todos: [
-        // {
-        //   id: 1,
-        //   text: 1,
-        //   completed: false
-        // }
+        {
+          id: 1,
+          text: 1,
+          completed: false
+        },
+        {
+          id: 2,
+          text: 2,
+          completed: true
+        }
       ],
       selectedFilter: "All",
       finalTodos: [],
@@ -22,109 +27,88 @@ class Main extends React.Component {
 
   };
 
-  handleChange = async (event) => {
+  componentWillMount() {
+    this.filter();
+  }
+  
+  createNewTodo = (event) => {
+    let key = require("randomstring");
+    key = key.generate({
+      length: 5,
+      charset: 'alphabetic'
+    });
+    const initToDo = [...this.state.todos, {
+      id: key,
+      text: this.state.currentToDo,
+      completed: false
+    }];
+    this.setState({
+      todos: initToDo,
+      currentToDo: ""
+    }, this.filter);
+    event.preventDefault();
+  }
+
+  handleChange = (event) => {
     const { value } = event.target;
 
-    await this.setState({
+    this.setState({
       currentToDo: value
     });
-    console.log(value);
   }
 
   handleDelete = (index) => {
-    // if (event.target === "div.list-item__delete")
     const todos = [...this.state.todos],
       upDateTodos = todos.filter((curr, i) => i !== index);
-    this.setState({ todos: upDateTodos })
-    // console.log(event.target);
-    console.log(index);
+    this.setState({ todos: upDateTodos }, this.filter)
   }
 
-  handleKeyPress = async (event) => {
-    if (event.which === 13) {
-      event.preventDefault();
-      let key = require("randomstring");
-      key = key.generate({
-        length: 5,
-        charset: 'alphabetic'
-      });
-      console.log(key);
-      const initToDo = [...this.state.todos, {
-        id: key,
-        text: this.state.currentToDo,
-        completed: false
-      }]
-      await this.setState({
-        todos: initToDo,
-        currentToDo: ""
-        
-      });
-      // console.log(this.state.currentToDo);
-      console.log(this.state.todos);
-    };
-  }
   
-  handleChangeStatus = async (event) => {
-    console.log(event.target.id);
-    // const todos = this.state.todos.map(el => {
-      //   if  (el.id === event.target.id) {
-        //     if (!el.completed){
-          //       el.completed = true;
-          //     } else {
-    //       el.completed = false;
-    //     }
-    //   }
-    //   return el;
-    // });
+  handleChangeStatus = (event) => {
     const todos = [...this.state.todos];
     todos[event.target.id]['completed'] = event.target.checked;
-    await this.setState({
+    this.setState({
       todos: todos
     })
-    console.log(todos);
   }
   
-  filter = async () => {
-    let finalTodoss;
+  filter = () => {
+    let finalTodos;
     const todos = [...this.state.todos];
+    console.log(todos);
     
     if (this.state.selectedFilter === "Active") {
-      finalTodoss = todos.filter((elem) => (elem.completed === false));
-      console.log(this.state.selectedFilter);
-      console.log(todos)
-    } else if (this.selectedFilter === "Completed") {
-      finalTodoss = todos.filter((elem) => (elem.completed === true));
-      console.log(this.finalTodoss);
+      finalTodos = todos.filter((elem) => (elem.completed === false));
+    } else if (this.state.selectedFilter === COMPLETED) {
+      finalTodos = todos.filter((elem) => (elem.completed === true));
     } else {
-      finalTodoss = todos;
-      console.log(this.state.selectedFilter);
+      finalTodos = todos;
     };
 
-    await this.setState({
-      finalTodos: finalTodoss
+    this.setState({
+      finalTodos: finalTodos
     })
-    console.log(this.state.finalTodos)
   }
 
-  selectFilter = async (event) => {
-    await this.setState({
+  selectFilter = (event) => {
+    this.setState({
       selectedFilter: event.target.name
-    });
-    this.filter();
+    }, this.filter);
   }
 
 
   render() {  
     return (
-      <>
         <div className="todos">
-          <input
-            type="text"
-            value={this.state.currentToDo}
-            placeholder="What need to be done?"
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
-          />
+          <form onSubmit={this.createNewTodo}>
+            <input
+            className="todos__input"
+              type="text"
+              value={this.state.currentToDo}
+              placeholder="What need to be done?"
+              onChange={this.handleChange}
+            />
+          </form>
           <div className="todo-list">
             <ul>
               {this.state.finalTodos.map((elem, i) => (
@@ -145,8 +129,6 @@ class Main extends React.Component {
             onclick={this.selectFilter}
           />
         </div>
-        
-      </>
     )
   }
 }
