@@ -54,13 +54,18 @@ class Main extends React.Component {
   }
 
 
-  handleChangeStatus = (event) => {
-    const todos = [...this.state.todos];
-    todos[event.target.id]['completed'] = event.target.checked;
-    this.setState({
-      todos: todos
-    })
+  handleChangeStatus = (ToDoItem) => {
+    this.setState(prevState => {
+      const copy = [...prevState.todos];
+      copy.forEach((item) => {
+        if (item.id === ToDoItem) {
+          item.completed = !item.completed
+        }
+      })
+      return { todos: copy };
+    }, this.filter);
   }
+
 
   counterActiveTodos = () => {
     let todos = this.state.todos;
