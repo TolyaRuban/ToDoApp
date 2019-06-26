@@ -142,6 +142,8 @@ li {
 .list-item__text {
   width: 100%;
   text-align: start;
+  word-break: break-all;
+  line-height: 1.2;
   transition: color linear .5s;
 }
 .text--through {
