@@ -9,7 +9,7 @@ function Footer(props) {
   return (
     <footer className={"footer " + (!props.length ? "hidden" : "")}>
       <div className="footer__item">
-        <p>{props.length} items left</p>
+        <p>{props.counter} items left</p>
       </div>
       <div className="footer__item" onClick={props.onclick}>
         <button name={ALL} className={"footer-item__btn " + (props.selected === ALL ? "selected" : "")}>All</button>
@@ -17,7 +17,7 @@ function Footer(props) {
         <button name={COMPLETED} className={"footer-item__btn " + (props.selected === COMPLETED ? "selected" : "")}>Completed</button>
       </div>
       <div className="footer__item">
-        <button className="footer-item__btn"> Clear completed</button>
+        <button className="footer-item__btn" onClick={props.onDeleteClick}> Clear completed</button>
       </div>
     </footer>
   )

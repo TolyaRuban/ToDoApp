@@ -19,7 +19,7 @@ function Item(props) {
             />
         </div>
         <div className={"list-item__text " + (checked ? "text--through" : "")}>{text}</div>
-        <div className="list-item__delete" onClick={() => handleDelete(index)}> ✕ </div>
+        <div className="list-item__delete" onClick={() => handleDelete(id)}> ✕ </div>
       </div>
     </li>
   )
