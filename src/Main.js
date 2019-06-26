@@ -9,18 +9,7 @@ class Main extends React.Component {
 
     this.state = {
       currentToDo: "",
-      todos: [
-        {
-          id: 1,
-          text: 1,
-          completed: false
-        },
-        {
-          id: 2,
-          text: 2,
-          completed: true
-        }
-      ],
+      todos: [],
       selectedFilter: "All",
       finalTodos: [],
       counter: 0,
