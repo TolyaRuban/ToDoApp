@@ -2,30 +2,31 @@
   text-align: center;
   border-color: #F5F5F5;
 }
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: none;
-
 }
+
 ul {
   list-style: none;
   width: 100%;
 }
+
 li {
   width: 100%;  
 }
+
 .main {
   position: relative;
   width: 550px;
-  /* margin: 50px 0 40px 0; */
   margin: auto;
   margin-top: 30px;
   text-align: center;
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background: #fff;
-  
 }
 
 .main h1 {
@@ -36,6 +37,7 @@ li {
   background: white;
   color: rgba(175, 47, 47, 0.15);
 }
+
 .todos {
   position: relative;
   display: block;
@@ -43,31 +45,22 @@ li {
   width: 100%;
   font-size: 24px;
   color: rgb(77, 77, 77);
-  /* box-shadow:  */
   box-shadow: 0 2px 223px 105px rgba(0, 0, 0, 0.2),
   0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  /* 0 1px 15px rgba(0, 0, 0, 0.2),
-  0 8px 0 -3px #f6f6f6,
-  0 9px 1px -3px rgba(0, 0, 0, 0.2),
-  0 16px 0 -6px #f6f6f6,
-  0 17px 2px -6px rgba(0, 0, 0, 0.2); */
-  
-  
 }
+
 .todos .todos__input {
   display: block;
   margin: auto;
-  /* margin-bottom: 30px; */
   padding: 16px 16px 16px 60px;
   width: 100%;
-  /* height: 65px; */
   font-size: 24px;
   color: inherit;
-  /* font-family: inherit; */
   border: none;
   background: rgba(0, 0, 0, 0.003);
   box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.77);
 }
+
 .todos .todos__input::-webkit-input-placeholder {
   font-style: italic;
   font-weight: 300;
@@ -82,7 +75,6 @@ li {
 
 .todos .todos__input::input-placeholder {
   font-style: italic;
-  /* fz */
   font-weight: 300;
   color: #e6e6e6;
 }
@@ -113,6 +105,7 @@ li {
   display: block;
   color: #cc9a9a;
 }
+
 .list-item:hover .list-item__delete:hover {
   color: #af5b5e;
 }
@@ -132,7 +125,6 @@ li {
   height: 40px;
   text-align: center;
   vertical-align: middle;
-  /* transition: background linear .5s; */
 }
 
 .list-item__check-box:checked + label::before {
@@ -146,6 +138,7 @@ li {
   line-height: 1.2;
   transition: color linear .5s;
 }
+
 .text--through {
   color: #d9d9d9;
   text-decoration: line-through;
@@ -154,7 +147,6 @@ li {
 .list-item__delete {
   position: relative;
   width: 40px;
-  /* height: 40px; */
   margin: 0;
   font-size: 22px;
   color: transparent;
@@ -195,9 +187,11 @@ li {
   color: inherit;
   cursor: pointer;
 }
+
 .footer-item__btn:hover {
   border-color: rgba(175, 47, 47, 0.1);
 }
+
 .selected {
   border-color: rgba(175, 47, 47, 0.2);
 }

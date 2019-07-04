@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Item from './Item';
-import Footer, { COMPLETED } from './Footer';
+import Footer, { ACTIVE, COMPLETED } from './Footer';
 
 class Main extends React.Component {
   constructor(props) {
@@ -18,25 +18,25 @@ class Main extends React.Component {
   };
 
   componentWillMount() {
-    this.filter();
+    const todos = JSON.parse(localStorage.getItem("allTodos")) || [];
+    this.setState({ todos }, this.filter);
   }
 
   createNewTodo = (event) => {
-    let key = require("randomstring");
-    key = key.generate({
+    event.preventDefault();
+    const key = require("randomstring").generate({
       length: 5,
       charset: 'alphabetic'
     });
-    const initToDo = [...this.state.todos, {
-      id: key,
-      text: this.state.currentToDo,
-      completed: false
-    }];
-    this.setState({
-      todos: initToDo,
+
+    this.setState((prevState) => ({
+      todos: [...prevState.todos, {
+        id: key,
+        text: this.state.currentToDo,
+        completed: false
+      }],
       currentToDo: ""
-    }, this.filter);
-    event.preventDefault();
+    }), this.filter);
   }
 
   handleChange = (event) => {
@@ -48,62 +48,51 @@ class Main extends React.Component {
   }
 
   handleDelete = (id) => {
-    const todos = [...this.state.todos],
-      upDateTodos = todos.filter((curr) => curr.id !== id);
-    this.setState({ todos: upDateTodos }, this.filter)
+    this.setState((prevState) => ({
+      todos: prevState.todos.filter((curr) => curr.id !== id)
+    }), this.filter)
   }
 
+  handleClickDeleteAll = (event) => {
+    this.setState((prevState) => ({
+      todos: prevState.todos.filter(elem => elem.completed === false)
+    }), this.filter)
+  }
 
   handleChangeStatus = (ToDoItem) => {
     this.setState(prevState => {
-      const copy = [...prevState.todos];
-      copy.forEach((item) => {
-        if (item.id === ToDoItem) {
-          item.completed = !item.completed
-        }
+      prevState.todos.map(item => {
+        if (item.id === ToDoItem) { item.completed = !item.completed };
+        return item;
       })
-      return { todos: copy };
     }, this.filter);
   }
 
-
   counterActiveTodos = () => {
-    let todos = this.state.todos;
-    let counter = todos.filter((elem) => (elem.completed === false)).length;
-    this.setState({ counter: counter });
+    const counter = this.state.todos.filter((elem) => (elem.completed === false)).length;
+    this.setState({ counter });
   }
 
   filter = () => {
     let finalTodos;
-    const todos = [...this.state.todos];
-    
-    if (this.state.selectedFilter === "Active") {
-      finalTodos = todos.filter((elem) => (elem.completed === false));
+
+    if (this.state.selectedFilter === ACTIVE) {
+      finalTodos = this.state.todos.filter((elem) => (elem.completed === false));
     } else if (this.state.selectedFilter === COMPLETED) {
-      finalTodos = todos.filter((elem) => (elem.completed === true));
+      finalTodos = this.state.todos.filter((elem) => (elem.completed === true));
     } else {
-      finalTodos = todos;
+      finalTodos = this.state.todos;
     };
 
     this.counterActiveTodos();
-    
-    this.setState({
-      finalTodos: finalTodos
-    })
+    localStorage.setItem('allTodos', JSON.stringify(this.state.todos));
+    this.setState({ finalTodos })
   }
 
   selectFilter = (event) => {
     this.setState({
       selectedFilter: event.target.name
     }, this.filter);
-  }
-
-  handleClickDeleteAll = (event) => {
-    let clearedTodos = this.state.todos.filter(elem => elem.completed === false);
-
-    this.setState({
-      todos: clearedTodos,
-    }, this.filter)
   }
 
   render() {
@@ -123,10 +112,10 @@ class Main extends React.Component {
             {this.state.finalTodos.map((elem, i) => (
               <Item
                 id={elem.id}
+                key={elem.id}
                 text={elem.text}
                 checked={elem.completed}
                 onChange={this.handleChangeStatus}
-                i={i}
                 handleDelete={this.handleDelete}
               />
             ))}

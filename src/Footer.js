@@ -5,7 +5,6 @@ export const ALL = "All";
 export const ACTIVE = "Active";
 
 function Footer(props) {
-
   return (
     <footer className={"footer " + (!props.length ? "hidden" : "")}>
       <div className="footer__item">

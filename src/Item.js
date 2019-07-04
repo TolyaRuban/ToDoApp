@@ -1,9 +1,9 @@
 import React from 'react';
 
 function Item(props) {
-  const { id, text, checked, onChange, i, handleDelete } = props;
+  const { id, text, checked, onChange, handleDelete } = props;
   return (
-    <li key={id}>
+    <li>
       <div className="list-item">
         <div className="list-item__check">
           <input

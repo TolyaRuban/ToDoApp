@@ -8,9 +8,7 @@ function App() {
   return (
     <main className="main">
       <h1>todos</h1>
-
       <Main />
-
     </main>
   );
 }
