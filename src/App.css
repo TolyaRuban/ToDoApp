@@ -1,33 +1,201 @@
 .App {
   text-align: center;
+  border-color: #F5F5F5;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+ul {
+  list-style: none;
+  width: 100%;
+}
+
+li {
+  width: 100%;  
+}
+
+.main {
+  position: relative;
+  width: 550px;
+  margin: auto;
+  margin-top: 30px;
+  text-align: center;
+  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #fff;
+}
+
+.main h1 {
+  margin-bottom: 30px;
+  font-size: 100px;
+  font-weight: 100;
+  text-align: center;
+  background: white;
+  color: rgba(175, 47, 47, 0.15);
+}
+
+.todos {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: 100%;
+  font-size: 24px;
+  color: rgb(77, 77, 77);
+  box-shadow: 0 2px 223px 105px rgba(0, 0, 0, 0.2),
+  0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+.todos .todos__input {
+  display: block;
+  margin: auto;
+  padding: 16px 16px 16px 60px;
+  width: 100%;
+  font-size: 24px;
+  color: inherit;
+  border: none;
+  background: rgba(0, 0, 0, 0.003);
+  box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.77);
+}
+
+.todos .todos__input::-webkit-input-placeholder {
+  font-style: italic;
+  font-weight: 300;
+  color: #e6e6e6;
+}
+
+.todos .todos__input::-moz-placeholder {
+  font-style: italic;
+  font-weight: 300;
+  color: #e6e6e6;
+}
+
+.todos .todos__input::input-placeholder {
+  font-style: italic;
+  font-weight: 300;
+  color: #e6e6e6;
+}
+
+.todo-list {
+  background-color: white;
+  margin: auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-top: 2px solid #E6E6E6;
+  list-style: none;
+  padding: 0 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.list-item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0;
+  border-bottom: 1px solid #E6E6E6
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.list-item:hover .list-item__delete {
+  display: block;
+  color: #cc9a9a;
+}
+
+.list-item:hover .list-item__delete:hover {
+  color: #af5b5e;
+}
+
+.list-item__check-box {
+  display: none;
+}
+
+.list-item__check-box + label::before {
+  content: "";
+  cursor: pointer;
+  color: transparent;
+  display: inline-block;
+  margin-right: 20px;
+  background: url("img/unchecked.svg") no-repeat;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.list-item__check-box:checked + label::before {
+  background:url("img/checked.svg") no-repeat;
+}
+
+.list-item__text {
+  width: 100%;
+  text-align: start;
+  word-break: break-all;
+  line-height: 1.2;
+  transition: color linear .5s;
+}
+
+.text--through {
+  color: #d9d9d9;
+  text-decoration: line-through;
+}
+
+.list-item__delete {
+  position: relative;
+  width: 40px;
+  margin: 0;
+  font-size: 22px;
+  color: transparent;
+  cursor: pointer;
+}
+
+.list-item__delete:hover {
+  color: #050505;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  padding: 5px;
+  background: transparent;
+  box-shadow:
+  /* The top layer shadow */
+  0 1px 1px rgba(0, 0, 0, 0.15),
+  /* The second layer */
+  0 10px 0 -5px #eee,
+  /* The second layer shadow */
+  0 10px 1px -4px rgba(0, 0, 0, 0.15),
+  /* The third layer */
+  0 20px 0 -10px #eee,
+  /* The third layer shadow */
+  0 20px 1px -9px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  color: #777;
+}
+
+.footer-item__btn {
+  background: inherit;
+  padding: 3px 7px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.footer-item__btn:hover {
+  border-color: rgba(175, 47, 47, 0.1);
+}
+
+.selected {
+  border-color: rgba(175, 47, 47, 0.2);
+}
+
+.hidden {
+  display: none;
 }
